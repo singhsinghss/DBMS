@@ -70,17 +70,17 @@ public class BookingServiceImpl implements BookingService {
        /* if (existingBookingId.isPresent()) {*/
             Bookings existingBooking = existingBookingId.get();
             System.out.println("Status: "+booking.getStatus());
-            if (booking != null) {
+            if (booking != null && (booking.getStatus().equalsIgnoreCase("Booked")|| booking.getStatus().equalsIgnoreCase("Cancelled"))) {
                 // Change booking status to Cancelled
                 //System.out.println("Status: "+booking.getStatus());
                 existingBooking.setStatus(booking.getStatus());
             }
-
+            else
+            {
+                System.out.println("Invalid status: "+booking.getStatus());
+                return null;
+            }
            return bookingRepository.save(existingBooking);
-
-
-
-
     }
 
 
