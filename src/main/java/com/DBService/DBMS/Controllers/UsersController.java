@@ -1,5 +1,6 @@
 package com.DBService.DBMS.Controllers;
 
+import com.DBService.DBMS.Models.Flights;
 import com.DBService.DBMS.Models.Users;
 import com.DBService.DBMS.Services.Interfaces.UsersService;
 import com.DBService.DBMS.Services.UsersServiceImpl;
@@ -10,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
@@ -28,7 +32,11 @@ public class UsersController {
     {
       return new ResponseEntity<>(userServiceImpl.getUserById(userId), HttpStatus.OK);
     }
-
+    @GetMapping
+    public ResponseEntity<List<Users>> getUsers() {
+        List<Users> users = userServiceImpl.getUsers();
+        return ResponseEntity.ok(users);
+    }
     @PutMapping("/{userId}")
     public ResponseEntity<String> updateUserDetails(@PathVariable Long userId,@RequestBody Users user)
     {

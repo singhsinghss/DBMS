@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,6 +65,11 @@ public class UsersServiceImpl implements UsersService {
         }
         userRepository.deleteById(user_id);
 
+    }
+
+    @Override
+    public List<Users> getUsers() {
+        return userRepository.findAll();
     }
 
 }
